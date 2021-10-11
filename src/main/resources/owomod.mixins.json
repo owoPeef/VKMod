@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "ru.owopeef.owomod.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "mixins": [
+  ],
+  "client": [
+    "TSMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

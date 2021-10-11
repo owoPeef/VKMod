@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "owomod",
+  "version": "${version}",
+
+  "name": "Test Mod",
+  "description": "This is an example description! Tell everyone what your mod is about!",
+  "authors": [
+    "owoPeef"
+  ],
+  "contact": {
+    "homepage": "https://github.com/owoPeef",
+    "sources": "https://github.com/owoPeef/VKMod"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/owomod/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "ru.owopeef.owomod.Main"
+    ]
+  },
+  "mixins": [
+    "owomod.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.17.x",
+    "java": ">=16"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
