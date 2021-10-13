@@ -6,7 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "TSMixin"
+    "TSMixin",
+    "GMMixin"
   ],
   "injectors": {
     "defaultRequire": 1

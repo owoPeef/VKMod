@@ -5,6 +5,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
+import ru.owopeef.owomod.Config;
 
 public class Selector extends Screen {
     public Selector() {
@@ -12,10 +13,14 @@ public class Selector extends Screen {
     }
 
     protected void init() {
-        this.addDrawableChild(new ButtonWidget(this.width / 2 - 100 + 205, 66, 50, 20, Text.of("Login via Password"), (buttonWidget) ->
+        if (Config.ACCESS_TOKEN != null)
+        {
+            MinecraftClient.getInstance().setScreen(new Messenger());
+        }
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 22, 66, 100, 20, Text.of("Login via Phone"), (buttonWidget) ->
                 MinecraftClient.getInstance().setScreen(new Login())
         ));
-        this.addDrawableChild(new ButtonWidget(this.width / 2 - 100 + 205, 106, 50, 20, Text.of("Login via Token"), (buttonWidget) ->
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 22, 106, 100, 20, Text.of("Login via Token"), (buttonWidget) ->
                 MinecraftClient.getInstance().setScreen(new Token())
         ));
     }

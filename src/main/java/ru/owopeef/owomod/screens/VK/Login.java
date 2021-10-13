@@ -1,5 +1,6 @@
 package ru.owopeef.owomod.screens.VK;
 
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
@@ -7,6 +8,12 @@ import net.minecraft.client.network.ServerAddress;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
+import org.json.JSONException;
+import org.json.JSONObject;
+import ru.owopeef.owomod.Config;
+import ru.owopeef.urls.Requests;
+
+import java.io.IOException;
 
 public class Login extends Screen {
     private TextFieldWidget loginField;
@@ -50,8 +57,24 @@ public class Login extends Screen {
     }
 
     private void addAndClose() {
-        login = this.loginField.getText();
+        login = this.loginField.getText().replace("+", "");
         password = this.passwordField.getText();
+        if (login.startsWith("8"))
+        {
+            login = login.substring(1);
+            login = "7" + login;
+        }
+        try {
+            JSONObject auth = Requests.AUTH(login, password);
+            Config.ACCESS_TOKEN = auth.getString("access_token");
+            Config.USER_ID = auth.getInt("user_id");
+            MinecraftClient.getInstance().setScreen(new Messenger());
+        } catch (IOException e) {
+            this.loginField.setText("");
+            this.passwordField.setText("");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     private void updateAddButton() {
