@@ -1,0 +1,6 @@
+vk.text=ВК
+vk.selector.login_token=Войти через токен
+vk.selector.login_number=Войти через телефон
+vk.selector.choose_auth=Выберите способ авторизации
+vk.messenger.header=Мессенджер
+vk.messenger.logged_as=Вы вошли как

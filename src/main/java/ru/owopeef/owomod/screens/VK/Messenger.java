@@ -3,6 +3,7 @@ package ru.owopeef.owomod.screens.VK;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import org.json.JSONException;
@@ -18,11 +19,11 @@ public class Messenger extends Screen {
 
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         this.renderBackground(matrices);
-        drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2, 20, 16777215);
+        drawCenteredText(matrices, this.textRenderer, Text.of(I18n.translate("vk.messenger.header")), this.width / 2, 20, 16777215);
         if (Config.FULLNAME != null)
         {
             TextRenderer tr = MinecraftClient.getInstance().textRenderer;
-            String text = "Вы вошли как " + Config.FULLNAME;
+            String text = I18n.translate("vk.messenger.logged_as") + Config.FULLNAME;
             tr.draw(matrices, text, this.width / 2 - text.length(), 40, 16777215);
         }
         else

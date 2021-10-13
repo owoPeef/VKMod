@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "id": "owomod",
-  "version": "${version}",
+  "version": "1.0",
 
-  "name": "Test Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "VKMod",
+  "description": "This mod was made as integration of the VK messenger into Minecraft",
   "authors": [
     "owoPeef"
   ],
