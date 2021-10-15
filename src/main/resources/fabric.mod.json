@@ -1,29 +1,29 @@
 {
   "schemaVersion": 1,
-  "id": "owomod",
+  "id": "vkinminecraft",
   "version": "1.0",
 
-  "name": "VKMod",
+  "name": "VKInMinecraft",
   "description": "This mod was made as integration of the VK messenger into Minecraft",
   "authors": [
     "owoPeef"
   ],
   "contact": {
-    "homepage": "https://github.com/owoPeef",
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/vkinminecraft",
     "sources": "https://github.com/owoPeef/VKMod"
   },
 
-  "license": "CC0-1.0",
-  "icon": "assets/owomod/icon.png",
+  "license": "MIT",
+  "icon": "assets/vkinminecraft/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "ru.owopeef.owomod.Main"
+      "ru.owopeef.vkinminecraft.Main"
     ]
   },
   "mixins": [
-    "owomod.mixins.json"
+    "vkinminecraft.mixins.json"
   ],
 
   "depends": {

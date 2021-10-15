@@ -2,8 +2,8 @@ package ru.owopeef.urls;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import ru.owopeef.owomod.Config;
-import ru.owopeef.owomod.Main;
+import ru.owopeef.vkinminecraft.Config;
+import ru.owopeef.vkinminecraft.Main;
 
 import java.io.BufferedReader;
 import java.io.IOException;

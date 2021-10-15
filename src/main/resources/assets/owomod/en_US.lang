@@ -1,6 +1,0 @@
-vk.text=VK
-vk.selector.login_token=Login via token
-vk.selector.login_number=Login via phone
-vk.selector.choose_auth=Choose an authorization method
-vk.messenger.header=Messenger
-vk.messenger.logged_as=You are logged as
