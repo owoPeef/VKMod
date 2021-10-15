@@ -29,7 +29,7 @@ public class Requests {
     public static JSONObject GET(String method, String params)
     {
         try {
-            String request_url = "https://api.vk.com/method/"+method+"?v=5.131&access_token=" + Config.ACCESS_TOKEN + params;
+            String request_url = "https://api.vk.com/method/" + method + "?v=5.131&access_token=" + Config.ACCESS_TOKEN + params;
             URL url = new URL(request_url);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));

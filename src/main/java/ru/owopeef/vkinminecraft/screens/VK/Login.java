@@ -33,17 +33,17 @@ public class Login extends Screen {
     protected void init() {
         assert this.client != null;
         this.client.keyboard.setRepeatEvents(true);
-        this.loginField = new TextFieldWidget(this.textRenderer, this.width / 2, 66, 200, 20, Text.of("Number"));
+        this.loginField = new TextFieldWidget(this.textRenderer, this.width / 2 - 100, 66, 200, 20, Text.of("Number"));
         this.loginField.setTextFieldFocused(true);
         this.loginField.setText("");
         this.loginField.setChangedListener((serverName) -> this.updateAddButton());
         this.addSelectableChild(this.loginField);
-        this.passwordField = new TextFieldWidget(this.textRenderer, this.width / 2, 106, 200, 20, Text.of("Password"));
+        this.passwordField = new TextFieldWidget(this.textRenderer, this.width / 2 - 100, 106, 200, 20, Text.of("Password"));
         this.passwordField.setMaxLength(128);
         this.passwordField.setText("");
         this.passwordField.setChangedListener((address) -> this.updateAddButton());
         this.addSelectableChild(this.passwordField);
-        this.addButton = this.addDrawableChild(new ButtonWidget(this.width / 2, this.height / 4 + 96 + 18, 200, 20, Text.of("Login"), (button) -> this.addAndClose()));
+        this.addButton = this.addDrawableChild(new ButtonWidget(this.width / 2 - 100, this.height / 4 + 96 + 18, 200, 20, Text.of("Login"), (button) -> this.addAndClose()));
         this.updateAddButton();
     }
 
@@ -58,11 +58,6 @@ public class Login extends Screen {
     private void addAndClose() {
         login = this.loginField.getText().replace("+", "");
         password = this.passwordField.getText();
-        if (login.startsWith("8"))
-        {
-            login = login.substring(1);
-            login = "7" + login;
-        }
         try {
             JSONObject auth = Requests.AUTH(login, password);
             Config.ACCESS_TOKEN = auth.getString("access_token");

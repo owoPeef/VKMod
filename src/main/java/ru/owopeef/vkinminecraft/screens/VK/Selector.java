@@ -3,7 +3,6 @@ package ru.owopeef.vkinminecraft.screens.VK;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.resource.language.I18n;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import ru.owopeef.vkinminecraft.Config;
@@ -17,10 +16,10 @@ public class Selector extends Screen {
         if (Config.ACCESS_TOKEN != null) {
             MinecraftClient.getInstance().setScreen(new Messenger());
         }
-        this.addDrawableChild(new ButtonWidget(this.width / 2, 66, 100, 20, Text.of("Login via phone number"), (buttonWidget) ->
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 50, 66, 100, 20, Text.of("Login via number"), (buttonWidget) ->
                 MinecraftClient.getInstance().setScreen(new Login())
         ));
-        this.addDrawableChild(new ButtonWidget(this.width / 2, 106, 100, 20, Text.of("Login via token"), (buttonWidget) ->
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 50, 106, 100, 20, Text.of("Login via token"), (buttonWidget) ->
                 MinecraftClient.getInstance().setScreen(new Token())
         ));
     }
