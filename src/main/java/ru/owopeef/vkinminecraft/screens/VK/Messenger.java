@@ -12,6 +12,7 @@ import ru.owopeef.urls.Requests;
 import java.util.Iterator;
 
 public class Messenger extends Screen {
+    // TODO: ADD LONGPOLL
     public String text;
     public Messenger() {
         super(Text.of("Messenger"));
@@ -46,10 +47,10 @@ public class Messenger extends Screen {
             String msg = Config.MESSAGES.get(a);
             drawCenteredText(matrices, this.textRenderer, title, this.width / 2, 60 + offset, 16777215);
             drawCenteredText(matrices, this.textRenderer, msg, this.width / 2, 60 + 10 + offset, 16777215);
+            offset = offset + 25;
+            a++;
             i1.next();
             i2.next();
-            offset += 20;
-            a++;
         }
 
         drawCenteredText(matrices, this.textRenderer, text, this.width / 2, 40, 16777215);

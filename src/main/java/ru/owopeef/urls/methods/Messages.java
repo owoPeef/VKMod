@@ -12,7 +12,6 @@ import java.util.Objects;
 public class Messages {
     public static void getDialogs(int count, int offset)
     {
-        // TODO | FIX: MESSAGE TYPE PHOTO == NULL
         try {
             JSONArray dialogs = Objects.requireNonNull(Requests.GET("messages.getDialogs", "&count=" + count + "&offset=" + offset)).getJSONObject("response").getJSONArray("items");
             int j = 0;
@@ -39,6 +38,23 @@ public class Messages {
                             String first_name = user.getString("first_name");
                             String last_name = user.getString("last_name");
                             title = first_name + " " + last_name;
+                        }
+                    }
+                    if (body.length() == 0)
+                    {
+                        String attach_type = msg.getJSONArray("attachments").getJSONObject(0).getString("type");
+                        if (Objects.equals(attach_type, "photo")) {
+                            body = "Фотография";
+                        } else if (Objects.equals(attach_type, "video")) {
+                            body = "Видео";
+                        } else if (Objects.equals(attach_type, "audio_message")) {
+                            body = "Голосовое сообщение";
+                        } else if (Objects.equals(attach_type, "audio")) {
+                            body = "Аудиозапись";
+                        } else if (Objects.equals(attach_type, "doc")) {
+                            body = "Файл";
+                        } else if (Objects.equals(attach_type, "sticker")) {
+                            body = "Стикер";
                         }
                     }
                     if (body.length() > 15)
