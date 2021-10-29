@@ -6,16 +6,20 @@ import net.minecraft.text.Text;
 import org.json.JSONException;
 import org.json.JSONObject;
 import ru.owopeef.urls.DialogueInitialization;
-import ru.owopeef.vkinminecraft.Config;
 import ru.owopeef.urls.Requests;
+import ru.owopeef.urls.longpoll.LPThread;
+import ru.owopeef.urls.methods.Messages;
+import ru.owopeef.vkinminecraft.Config;
+import ru.owopeef.vkinminecraft.debug.ScreenChange;
 
 import java.util.Iterator;
 
 public class Messenger extends Screen {
-    // TODO: ADD LONGPOLL
     public String text;
+    LPThread th = new LPThread();
     public Messenger() {
         super(Text.of("Messenger"));
+        ScreenChange.LOG(this.getClass().getSimpleName());
     }
 
     @Override
@@ -31,6 +35,8 @@ public class Messenger extends Screen {
             e.printStackTrace();
         }
         DialogueInitialization.Init();
+        Messages.getLongPollServer();
+        th.start();
     }
 
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
@@ -45,9 +51,14 @@ public class Messenger extends Screen {
         {
             String title = Config.TITLES.get(a);
             String msg = Config.MESSAGES.get(a);
-            drawCenteredText(matrices, this.textRenderer, title, this.width / 2, 60 + offset, 16777215);
-            drawCenteredText(matrices, this.textRenderer, msg, this.width / 2, 60 + 10 + offset, 16777215);
-            offset = offset + 25;
+            int unread = Config.UNREAD.get(a);
+            drawStringWithShadow(matrices, this.textRenderer, title, 10, 60 + offset, 16777215);
+            drawStringWithShadow(matrices, this.textRenderer, msg, 10, 60 + 10 + offset, 6450554);
+            if (unread > 0) {
+                drawStringWithShadow(matrices, this.textRenderer, "●", this.width - 10, 65 + offset, 5341624);
+                drawStringWithShadow(matrices, this.textRenderer, String.valueOf(unread), this.width - 10, 65 + offset, 16777215);
+            }
+            offset = offset + 40;
             a++;
             i1.next();
             i2.next();

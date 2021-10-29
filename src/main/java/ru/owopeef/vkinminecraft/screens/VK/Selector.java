@@ -6,10 +6,12 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import ru.owopeef.vkinminecraft.Config;
+import ru.owopeef.vkinminecraft.debug.ScreenChange;
 
 public class Selector extends Screen {
     public Selector() {
         super(Text.of("Selector"));
+        ScreenChange.LOG(this.getClass().getSimpleName());
     }
 
     protected void init() {

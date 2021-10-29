@@ -7,6 +7,7 @@ public class DialogueInitialization {
     public static void Init()
     {
         Config.TITLES.clear();
+        Config.UNREAD.clear();
         Config.MESSAGES.clear();
         Messages.getDialogs(5, 0);
     }

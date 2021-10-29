@@ -4,12 +4,45 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import ru.owopeef.urls.Requests;
+import ru.owopeef.urls.longpoll.LPThread;
 import ru.owopeef.vkinminecraft.Config;
 import ru.owopeef.vkinminecraft.Main;
+import ru.owopeef.vkinminecraft.debug.Logger;
 
 import java.util.Objects;
 
 public class Messages {
+    public static void getLongPollServer() {
+        try {
+            JSONObject lp = Requests.GET("messages.getLongPollServer", "");
+            assert lp != null;
+            JSONObject resp = lp.getJSONObject("response");
+            LPThread.server = resp.getString("server");
+            LPThread.key = resp.getString("key");
+            LPThread.ts = resp.getInt("ts");
+            Logger.Log("LP_server=" + LPThread.server);
+            Logger.Log("LP_key=" + LPThread.key);
+            Logger.Log("LP_ts=" + LPThread.ts);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String getConversationsById(int peer_ids) {
+        JSONObject getter = Objects.requireNonNull(Requests.GET("messages.getConversationsById", "&peer_ids=" + peer_ids));
+        Logger.Log("messages.getConversationsById()=" + getter);
+        JSONArray items = getter.getJSONObject("response").getJSONArray("items");
+        JSONObject chat_settings = items.getJSONObject(0);
+        String title;
+        if (chat_settings.has("chat_settings")) {
+            title = items.getJSONObject(0).getJSONObject("chat_settings").getString("title");
+        } else {
+            JSONObject profiles = getter.getJSONObject("response").getJSONArray("profiles").getJSONObject(0);
+            title = profiles.getString("first_name") + " " + profiles.getString("last_name");
+        }
+        return title;
+    }
+
     public static void getDialogs(int count, int offset)
     {
         try {
@@ -19,6 +52,14 @@ public class Messages {
             {
                 try {
                     JSONObject dialogue = dialogs.getJSONObject(j);
+                    try {
+                        int unread = dialogue.getInt("unread");
+                        Config.UNREAD.add(unread);
+                    } catch (JSONException e) {
+                        Config.UNREAD.add(0);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     JSONObject msg = dialogue.getJSONObject("message");
                     String title = msg.getString("title");
                     String body = msg.getString("body");

@@ -8,5 +8,6 @@ public class Config {
     public static String ACCESS_TOKEN;
     public static int USER_ID;
     public static List<String> TITLES = new ArrayList<>();
+    public static List<Integer> UNREAD = new ArrayList<>();
     public static List<String> MESSAGES = new ArrayList<>();
 }

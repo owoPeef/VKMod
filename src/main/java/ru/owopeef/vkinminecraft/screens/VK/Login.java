@@ -9,8 +9,11 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import org.json.JSONException;
 import org.json.JSONObject;
-import ru.owopeef.vkinminecraft.Config;
 import ru.owopeef.urls.Requests;
+import ru.owopeef.vkinminecraft.Config;
+import ru.owopeef.vkinminecraft.config.ModConfig;
+import ru.owopeef.vkinminecraft.debug.Logger;
+import ru.owopeef.vkinminecraft.debug.ScreenChange;
 
 import java.io.IOException;
 
@@ -23,6 +26,7 @@ public class Login extends Screen {
 
     public Login() {
         super(Text.of("Login"));
+        ScreenChange.LOG(this.getClass().getSimpleName());
     }
 
     public void tick() {
@@ -63,6 +67,8 @@ public class Login extends Screen {
             Config.ACCESS_TOKEN = auth.getString("access_token");
             Config.USER_ID = auth.getInt("user_id");
             MinecraftClient.getInstance().setScreen(new Messenger());
+            Logger.Log("ACCESS_TOKEN=" + Config.ACCESS_TOKEN);
+            ModConfig.ConfigWrite("{\"access_token\":\""+Config.ACCESS_TOKEN+"\",\"user_id\":"+Config.USER_ID+"}");
         } catch (IOException e) {
             this.loginField.setText("");
             this.passwordField.setText("");
