@@ -14,6 +14,7 @@ import ru.owopeef.vkinminecraft.debug.ScreenChange;
 
 import java.util.Iterator;
 
+@SuppressWarnings("deprecation")
 public class Messenger extends Screen {
     public String text;
     LPThread th = new LPThread();
@@ -36,6 +37,9 @@ public class Messenger extends Screen {
         }
         DialogueInitialization.Init();
         Messages.getLongPollServer();
+        if (th.isAlive()) {
+            th.stop();
+        }
         th.start();
     }
 
